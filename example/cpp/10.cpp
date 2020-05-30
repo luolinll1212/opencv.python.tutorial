@@ -48,6 +48,7 @@ void kmeans_data_demo() {
 	Mat centers;
 	kmeans(points, numCluster, labels, TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 10, 0.1), 3, KMEANS_PP_CENTERS, centers);
 
+
 	// �ò�ͬ��ɫ��ʾ����
 	img = Scalar::all(255);
 	for (int i = 0; i < sampleCount; i++) {

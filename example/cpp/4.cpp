@@ -5,6 +5,7 @@
 using namespace cv;
 using namespace std;
 
+
 int main(int argc, char** argv) {
 	Mat gray_src, binary, dst;
 	Mat src = imread("4.png");

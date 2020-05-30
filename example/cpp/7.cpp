@@ -4,6 +4,7 @@
 using namespace cv;
 using namespace std;
 
+
 Mat tpl;
 void sort_box(vector<Rect> &boxes);
 void detect_defect(Mat &binary, vector<Rect> rects, vector<Rect> &defect);

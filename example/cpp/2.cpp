@@ -5,6 +5,7 @@
 using namespace cv;
 using namespace std;
 
+
 int max_count = 255;
 int threshold_value = 100;
 const char* output_lines = "Hough Lines";

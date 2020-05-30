@@ -5,6 +5,7 @@ using namespace cv;
 using namespace cv::ml;
 using namespace std;
 
+
 string positive_dir = "positive";
 string negative_dir = "negative";
 void get_hog_descriptor(Mat &image, vector<float> &desc);

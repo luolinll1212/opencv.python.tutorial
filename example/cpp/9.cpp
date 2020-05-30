@@ -4,6 +4,7 @@
 using namespace cv;
 using namespace std;
 
+
 void scanAndDetectQRCode(Mat & image);
 bool isXCorner(Mat &image);
 bool isYCorner(Mat &image);

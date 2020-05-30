@@ -5,6 +5,7 @@
 using namespace cv;
 using namespace std;
 
+
 int main(int argc, char** argv) {
 	Mat src = imread("5.png");
 	if (src.empty()) {
