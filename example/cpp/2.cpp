@@ -12,7 +12,7 @@ Mat src, roiImage, dst;
 void detectLines(int, void*);
 void morhpologyLines(int, void*);
 int main(int argc, char** argv) {
-	src = imread("D:/gloomyfish/case2.png", IMREAD_GRAYSCALE);
+	src = imread("2.png", IMREAD_GRAYSCALE);
 	if (src.empty()) {
 		printf("could not load image...\n");
 		return -1;

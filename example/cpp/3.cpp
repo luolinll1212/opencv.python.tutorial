@@ -7,7 +7,7 @@ using namespace std;
 
 Mat src, binary, dst;
 int main(int argc, char** argv) {
-	src = imread("D:/gloomyfish/case3.png", IMREAD_GRAYSCALE);
+	src = imread("3.png", IMREAD_GRAYSCALE);
 	if (src.empty()) {
 		printf("could not load image...\n");
 		return -1;
@@ -15,11 +15,11 @@ int main(int argc, char** argv) {
 	namedWindow("input image", CV_WINDOW_AUTOSIZE);
 	imshow("input image", src);
 
-	// ¶þÖµ»¯
+	// ï¿½ï¿½Öµï¿½ï¿½
 	threshold(src, binary, 0, 255, THRESH_BINARY | THRESH_OTSU);
 	imshow("binary image", binary);
 
-	// ÐÎÌ¬Ñ§²Ù×÷
+	// ï¿½ï¿½Ì¬Ñ§ï¿½ï¿½ï¿½ï¿½
 	Mat kernel = getStructuringElement(MORPH_RECT, Size(3, 3), Point(-1, -1));
 	morphologyEx(binary, dst, MORPH_CLOSE, kernel, Point(-1, -1));
 	imshow("close image", dst);
@@ -35,10 +35,10 @@ int main(int argc, char** argv) {
 	Mat resultImage = Mat::zeros(src.size(), CV_8UC3);
 	Point cc;
 	for (size_t t = 0; t < contours.size(); t++) {
-		// Ãæ»ý¹ýÂË
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		double area = contourArea(contours[t]);
 		if (area < 100) continue;
-		// ºá×Ý±È¹ýÂË
+		// ï¿½ï¿½ï¿½Ý±È¹ï¿½ï¿½ï¿½
 		Rect rect = boundingRect(contours[t]);
 		float ratio = float(rect.width) / float(rect.height);
 		

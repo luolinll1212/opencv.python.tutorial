@@ -6,7 +6,7 @@ using namespace cv;
 using namespace std;
 
 int main(int argc, char** argv) {
-	Mat src = imread("D:/gloomyfish/case6.jpg");
+	Mat src = imread("6.jpg");
 	if (src.empty()) {
 		printf("could not load image...\n");
 		return -1;
@@ -23,13 +23,13 @@ int main(int argc, char** argv) {
 	threshold(gray_src, binary, 0, 255, THRESH_BINARY | THRESH_TRIANGLE);
 	imshow("binary", binary);
 
-	// ÐÎÌ¬Ñ§²Ù×÷
+	// ï¿½ï¿½Ì¬Ñ§ï¿½ï¿½ï¿½ï¿½
 	Mat morphImage;
 	Mat kernel = getStructuringElement(MORPH_RECT, Size(3, 3), Point(-1, -1));
 	morphologyEx(binary, morphImage, MORPH_CLOSE, kernel, Point(-1, -1), 2);
 	imshow("morphology", morphImage);
 
-	// »ñÈ¡×î´óÂÖÀª
+	// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	vector<vector<Point>> contours;
 	vector<Vec4i> hireachy;
 	findContours(morphImage, contours, hireachy, CV_RETR_EXTERNAL, CHAIN_APPROX_SIMPLE, Point());

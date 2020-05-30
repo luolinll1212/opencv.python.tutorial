@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	Mat gray_src, binary, dst;
-	Mat src = imread("D:/gloomyfish/case4.png");
+	Mat src = imread("4.png");
 	if (src.empty()) {
 		printf("could not load image...\n");
 		return -1;
@@ -16,23 +16,23 @@ int main(int argc, char** argv) {
 	imshow("input image", src);
 	cvtColor(src, gray_src, COLOR_BGR2GRAY);
 
-	// ¶þÖµ·Ö¸î
+	// ï¿½ï¿½Öµï¿½Ö¸ï¿½
 	threshold(gray_src, binary, 0, 255, THRESH_BINARY | THRESH_TRIANGLE);
 	imshow("binary image", binary);
 
-	// ÐÎÌ¬Ñ§²Ù×÷
+	// ï¿½ï¿½Ì¬Ñ§ï¿½ï¿½ï¿½ï¿½
 	Mat kernel = getStructuringElement(MORPH_RECT, Size(3, 3), Point(-1, -1));
 	dilate(binary, binary, kernel, Point(-1, -1), 1);
 	imshow("dilate image", binary);
 
-	// ¾àÀë±ä»»
+	// ï¿½ï¿½ï¿½ï¿½ä»»
 	Mat dist;
 	bitwise_not(binary, binary);
 	distanceTransform(binary, dist, CV_DIST_L2, 3);
 	normalize(dist, dist, 0, 1.0, NORM_MINMAX);
 	imshow("dist image", dist);
 
-	// ãÐÖµ»¯¶þÖµ·Ö¸î
+	// ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Öµï¿½Ö¸ï¿½
 	Mat dist_8u;
 	dist.convertTo(dist_8u, CV_8U);
 	adaptiveThreshold(dist_8u, dist_8u, 255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 85, 0.0);
@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
 	dilate(dist_8u, dist_8u, kernel, Point(-1, -1), 2);
 	imshow("dist-binary", dist_8u);
 
-	// Á¬Í¨ÇøÓò¼ÆÊý
+	// ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	vector<vector<Point>> contours;
 	findContours(dist_8u, contours, CV_RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 

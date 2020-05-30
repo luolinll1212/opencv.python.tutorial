@@ -13,7 +13,7 @@ const char* roi_win = "Final Result";
 void FindROI(int, void*);
 void Check_Skew(int, void*);
 int main(int argc, char** argv) {
-	src = imread("D:/gloomyfish/case1r.png");
+	src = imread("1.png");
 	if (src.empty()) {
 		printf("could not load image...\n");
 		return -1;

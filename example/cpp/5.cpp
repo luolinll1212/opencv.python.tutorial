@@ -6,7 +6,7 @@ using namespace cv;
 using namespace std;
 
 int main(int argc, char** argv) {
-	Mat src = imread("D:/gloomyfish/case5.png");
+	Mat src = imread("5.png");
 	if (src.empty()) {
 		printf("could not load image...\n");
 		return 0;
@@ -14,24 +14,24 @@ int main(int argc, char** argv) {
 	namedWindow("input image", CV_WINDOW_AUTOSIZE);
 	imshow("input image", src);
 
-	// ¶þÖµ´¦Àí
+	// ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
 	Mat gray_src, binary, dst;
 	cvtColor(src, gray_src, COLOR_BGR2GRAY);
 	threshold(gray_src, binary, 0, 255, THRESH_BINARY_INV | THRESH_OTSU);
 	imshow("binary image", binary);
 
-	// ÐÎÌ¬Ñ§²Ù×÷
+	// ï¿½ï¿½Ì¬Ñ§ï¿½ï¿½ï¿½ï¿½
 	Mat kernel = getStructuringElement(MORPH_RECT, Size(5, 5), Point(-1, -1));
 	morphologyEx(binary, dst, MORPH_CLOSE, kernel, Point(-1, -1), 3);
 	imshow("morphology", dst);
 
-	// ÂÖÀª·¢ÏÖ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	bitwise_not(dst, dst, Mat());
 	vector<vector<Point>> contours;
 	vector<Vec4i> hireachy;
 	findContours(dst, contours, hireachy, CV_RETR_TREE, CHAIN_APPROX_SIMPLE, Point());
 
-	// ÂÖÀª»ætÖÆ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½
 	int width = src.cols;
 	int height = src.rows;
 	Mat drawImage = Mat::zeros(src.size(), CV_8UC3);
@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
 	printf("number of lines : %d\n", lines.size());
 	imshow("lines image", linesImage);
 
-	// Ñ°ÕÒÓë¶¨Î»ÉÏÏÂ×óÓÒËÄÌõÖ±Ïß
+	// Ñ°ï¿½ï¿½ï¿½ë¶¨Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½
 	int deltah = 0;
 	Vec4i topLine, bottomLine;
 	Vec4i leftLine, rightLine;
@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
 	cout << "left line : p1(x, y) = " << leftLine[0] << "," << leftLine[1] << " p2(x, y) = " << leftLine[2] << "," << leftLine[3] << endl;
 	cout << "right line : p1(x, y) = " << rightLine[0] << "," << rightLine[1] << " p2(x, y) = " << rightLine[2] << "," << rightLine[3] << endl;
 
-	// ÄâºÏËÄÌõÖ±Ïß·½³Ì
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ß·ï¿½ï¿½ï¿½
 	float k1, c1;
 	k1 = float(topLine[3] - topLine[1]) / float(topLine[2] - topLine[0]);
 	c1 = topLine[1] - k1*topLine[0];
@@ -99,17 +99,17 @@ int main(int argc, char** argv) {
 	k4 = float(rightLine[3] - rightLine[1]) / float(rightLine[2] - rightLine[0]);
 	c4 = rightLine[1] - k4*rightLine[0];
 
-	// ËÄÌõÖ±Ïß½»µã
-	Point p1; // ×óÉÏ½Ç
+	// ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ß½ï¿½ï¿½ï¿½
+	Point p1; // ï¿½ï¿½ï¿½Ï½ï¿½
 	p1.x = static_cast<int>((c1 - c3) / (k3 - k1));
 	p1.y = static_cast<int>(k1*p1.x + c1);
-	Point p2; // ÓÒÉÏ½Ç
+	Point p2; // ï¿½ï¿½ï¿½Ï½ï¿½
 	p2.x = static_cast<int>((c1 - c4) / (k4 - k1));
 	p2.y = static_cast<int>(k1*p2.x + c1);
-	Point p3; // ×óÏÂ½Ç
+	Point p3; // ï¿½ï¿½ï¿½Â½ï¿½
 	p3.x = static_cast<int>((c2 - c3) / (k3 - k2));
 	p3.y = static_cast<int>(k2*p3.x + c2);
-	Point p4; // ÓÒÏÂ½Ç
+	Point p4; // ï¿½ï¿½ï¿½Â½ï¿½
 	p4.x = static_cast<int>((c2 - c4) / (k4 - k2));
 	p4.y = static_cast<int>(k2*p4.x + c2);
 	cout << "p1(x, y)=" << p1.x << "," << p1.y << endl;
@@ -117,7 +117,7 @@ int main(int argc, char** argv) {
 	cout << "p3(x, y)=" << p3.x << "," << p3.y << endl;
 	cout << "p4(x, y)=" << p4.x << "," << p4.y << endl;
 
-	// ÏÔÊ¾ËÄ¸öµã×ø±ê
+	// ï¿½ï¿½Ê¾ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	circle(linesImage, p1, 2, Scalar(255, 0, 0), 2, 8, 0);
 	circle(linesImage, p2, 2, Scalar(255, 0, 0), 2, 8, 0);
 	circle(linesImage, p3, 2, Scalar(255, 0, 0), 2, 8, 0);
@@ -125,7 +125,7 @@ int main(int argc, char** argv) {
 	line(linesImage, Point(topLine[0], topLine[1]), Point(topLine[2], topLine[3]), Scalar(0, 255, 0), 2, 8, 0);
 	imshow("four corners", linesImage);
 
-	// Í¸ÊÓ±ä»»
+	// Í¸ï¿½Ó±ä»»
 	vector<Point2f> src_corners(4);
 	src_corners[0] = p1;
 	src_corners[1] = p2;
@@ -138,7 +138,7 @@ int main(int argc, char** argv) {
 	dst_corners[2] = Point(0, height);
 	dst_corners[3] = Point(width, height);
 
-	// »ñÈ¡Í¸ÊÓ±ä»»¾ØÕó
+	// ï¿½ï¿½È¡Í¸ï¿½Ó±ä»»ï¿½ï¿½ï¿½ï¿½
 	Mat resultImage;
 	Mat warpmatrix = getPerspectiveTransform(src_corners, dst_corners);
 	warpPerspective(src, resultImage, warpmatrix, resultImage.size(), INTER_LINEAR);
